@@ -1,9 +1,15 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import HelloWorld from './HelloWorld';
 
 class App extends Component {
-
+  constructor(props){
+    super(props);
+    this.changeName = this.changeName.bind(this);
+    this.state = { username : ""}
+    
+  }
   render() {
     return (
       <div className="App">
@@ -11,8 +17,10 @@ class App extends Component {
         {
           this.is_text? 
           <img src={logo} className="App-logo" alt="logo" /> 
-          : <h1>Logo placeholder</h1>
+          :<h1>Placeholder</h1>
         }
+          <HelloWorld name = {this.state.username}/>
+          <input type="text" onChange = {(e) => this.changeName(e)}/>
           <h1 className="App-title">Welcome to the jungle</h1>
         </header>
         <p className="App-intro">
@@ -22,12 +30,17 @@ class App extends Component {
     );
   }
 
-  componentWillMount() {
-    console.log("Will mount");
-    this.is_text = false;
+  changeName(str) {
+    //console.log(str.target.value)
+    this.setState({username : str.target.value});
   }
 
   componentWillMount() {
+    console.log("Will mount");
+    this.is_text = true;
+  }
+
+  componentDidMount() {
     console.log("Did mount");
   }
 
